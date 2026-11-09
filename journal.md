@@ -58,3 +58,15 @@ This relates to underflow because the program
 would be trying to remove more elements than
 the queue contains.
 
+## Phase 4: Validation & Reflection
+
+In this phase, I reviewed my Corporate Merger Simulator and tested it using different starting company sizes.
+
+I tested companies with large sizes, small sizes, and a company that already reached the Titan threshold. These tests helped me verify that the simulation stops under the correct conditions.
+
+During my code review, I checked for possible issues such as removing elements from an empty queue, incorrect merger counts, and failing to recognize an existing Titan.
+
+One helpful suggestion from the AI review was to consider using `long` instead of `int` for extremely large company sizes to prevent integer overflow. I decided to keep `int` because it meets the assignment requirements and works for the values used in my tests.
+
+Overall, this project helped me better understand how PriorityQueue organizes data efficiently and how important it is to test different scenarios before finishing a program.
+
