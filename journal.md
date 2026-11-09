@@ -17,3 +17,22 @@ I could reverse the comparison in compareTo().
 This would make the queue prioritize larger
 companies instead of smaller ones.
 
+## Phase 2: The Merger Logic
+
+In this phase, I added the merger logic using a
+while loop and Java's PriorityQueue.
+
+The program removes the two smallest companies,
+combines their sizes, adds a 10% synergy bonus,
+and creates a new merged company.
+
+I learned that PriorityQueue is more efficient
+than sorting an ArrayList during every merger.
+Adding an element to a PriorityQueue takes
+O(log n) time, while sorting an entire ArrayList
+takes O(n log n) time.
+
+This makes PriorityQueue a better choice when
+the program repeatedly needs to find and remove
+the smallest companies.
+

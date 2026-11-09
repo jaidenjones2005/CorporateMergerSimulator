@@ -21,19 +21,55 @@ public class Main {
         market.add(new Company("Initech", 3000));
         market.add(new Company("Globex Corporation", 25000));
 
-        System.out.println("\nCompanies in market: " + market.size());
+        System.out.println("\nStarting companies: " + market.size());
 
-        // Test the priority queue
+        // Phase 1: Check smallest company
         System.out.println("\n--- Smallest Company Test ---");
 
         Company smallest = market.poll();
-
         System.out.println("Smallest company: " + smallest);
-
-        // Add the company back
         market.add(smallest);
 
-        System.out.println("\nCompany returned to market.");
-        System.out.println("Total companies: " + market.size());
+        // Phase 2: Merger Logic
+        System.out.println("\n--- Beginning Corporate Mergers ---");
+
+        int mergerCount = 0;
+
+        while (market.size() >= 2) {
+
+            // Remove two smallest companies
+            Company companyA = market.poll();
+            Company companyB = market.poll();
+
+            // Calculate 10% synergy bonus
+            int newSize = (int) ((companyA.getSize()
+                    + companyB.getSize()) * 1.1);
+
+            // Create merged company
+            String newName = companyA.getName()
+                    + "-" + companyB.getName();
+
+            Company mergedCompany = new Company(newName, newSize);
+
+            // Add merged company back to market
+            market.add(mergedCompany);
+
+            mergerCount++;
+
+            System.out.println(
+                    "MERGER: " + companyA.getName()
+                            + " and " + companyB.getName()
+                            + " have merged into "
+                            + mergedCompany.getName()
+                            + " with size "
+                            + mergedCompany.getSize() + "!"
+            );
+        }
+
+        System.out.println("\n--- Merger Results ---");
+
+        System.out.println("Total mergers: " + mergerCount);
+
+        System.out.println("Final company: " + market.peek());
     }
 }
