@@ -21,37 +21,49 @@ public class Main {
         market.add(new Company("Initech", 3000));
         market.add(new Company("Globex Corporation", 25000));
 
+        final int TITAN_THRESHOLD = 500000;
+
+        int mergerCount = 0;
+        Company titan = null;
+
         System.out.println("\nStarting companies: " + market.size());
 
-        // Phase 1: Check smallest company
+        // Phase 1: Test smallest company
         System.out.println("\n--- Smallest Company Test ---");
 
         Company smallest = market.poll();
         System.out.println("Smallest company: " + smallest);
         market.add(smallest);
 
-        // Phase 2: Merger Logic
+        // Check for an existing titan
+        for (Company company : market) {
+            if (company.getSize() >= TITAN_THRESHOLD) {
+                titan = company;
+                break;
+            }
+        }
+
+        // Phase 2 & 3: Merger simulation
         System.out.println("\n--- Beginning Corporate Mergers ---");
 
-        int mergerCount = 0;
+        while (market.size() >= 2 && titan == null) {
 
-        while (market.size() >= 2) {
-
-            // Remove two smallest companies
+            // Remove the two smallest companies
             Company companyA = market.poll();
             Company companyB = market.poll();
 
-            // Calculate 10% synergy bonus
+            // Calculate synergy bonus
             int newSize = (int) ((companyA.getSize()
                     + companyB.getSize()) * 1.1);
 
-            // Create merged company
+            // Combine company names
             String newName = companyA.getName()
                     + "-" + companyB.getName();
 
+            // Create new merged company
             Company mergedCompany = new Company(newName, newSize);
 
-            // Add merged company back to market
+            // Add merged company back to the market
             market.add(mergedCompany);
 
             mergerCount++;
@@ -64,12 +76,31 @@ public class Main {
                             + " with size "
                             + mergedCompany.getSize() + "!"
             );
+
+            // Check for Industry Titan
+            if (mergedCompany.getSize() >= TITAN_THRESHOLD) {
+                titan = mergedCompany;
+
+                System.out.println(
+                        "\nAn Industry Titan has emerged!"
+                );
+                break;
+            }
         }
 
-        System.out.println("\n--- Merger Results ---");
+        // Final Report
+        System.out.println("\n=== FINAL INDUSTRY REPORT ===");
+
+        if (titan != null) {
+            System.out.println("Industry Titan: " + titan.getName());
+            System.out.println("Titan Size: " + titan.getSize());
+        } else {
+            System.out.println("No titan has emerged.");
+        }
 
         System.out.println("Total mergers: " + mergerCount);
+        System.out.println("Companies remaining: " + market.size());
 
-        System.out.println("Final company: " + market.peek());
+        System.out.println("\nSimulation complete!");
     }
 }

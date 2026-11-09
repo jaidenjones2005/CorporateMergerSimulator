@@ -36,3 +36,25 @@ This makes PriorityQueue a better choice when
 the program repeatedly needs to find and remove
 the smallest companies.
 
+## Phase 3: The Titan Threshold
+
+In this phase, I updated the merger simulation to
+stop when a company reaches 500,000 units or when
+fewer than two companies remain in the market.
+
+I added a counter to track the total number of
+mergers and created a final report that displays
+whether an Industry Titan emerged.
+
+I learned that checking the queue size before
+calling poll() twice is important because poll()
+returns null when the queue is empty.
+
+Without checking the queue size, the program
+could try to access a company that doesn't exist,
+causing a NullPointerException.
+
+This relates to underflow because the program
+would be trying to remove more elements than
+the queue contains.
+
